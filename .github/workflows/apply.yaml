@@ -13,7 +13,7 @@ jobs:
   Apply:
     name: 'Apply Changes'
     runs-on: ubuntu-latest
-    environment: aws_credentials
+    environment: Enviroments
 
     defaults:
       run:
