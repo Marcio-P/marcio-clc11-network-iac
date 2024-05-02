@@ -13,7 +13,7 @@ resource "aws_subnet" "sub_net_pub_1a" {
   cidr_block = "10.0.10.0/24"
 
   tags = {
-    Name = "iac-public_subnet-1a"
+    Name = "iac-public_subnet-1aaaaaaaaaaaa"
   }
 }
 
