@@ -1,17 +1,16 @@
-	name: Deploy Infrastructure
+---
+name: Deploy Infrastructure
 on:
   push:
     branches:
       - main
-
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-
 jobs:
-   Checkov:
-    name: 'Check TF Vuls'
+  Checkov:
+    name: Check TF Vuls
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,29 +23,23 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: .
-          framework: terraform 
-
+          framework: terraform
   Apply:
-    name: 'Apply Changes'
+    name: Apply Changes
     runs-on: ubuntu-latest
     environment: aws_credentials
     needs: Checkov
-
     defaults:
       run:
         shell: bash
-        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_wrapper: false
-
       - name: Terraform Init
         run: terraform init
-        
       - name: Terraform Apply
         run: terraform apply --auto-approve
