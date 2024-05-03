@@ -1,4 +1,4 @@
-name: Deploy Infrastructure
+	name: Deploy Infrastructure
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
-jobs:      
+jobs:
    Checkov:
     name: 'Check TF Vuls'
     runs-on: ubuntu-latest
@@ -24,11 +24,12 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: .
-          framework: terraform   
+          framework: terraform 
+
   Apply:
     name: 'Apply Changes'
     runs-on: ubuntu-latest
-    environment: Enviroments
+    environment: aws_credentials
     needs: Checkov
 
     defaults:
