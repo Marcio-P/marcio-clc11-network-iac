@@ -9,12 +9,20 @@ resource "aws_vpc" "vpc_iac_clc11" {
 
 # Correcao primeira issue
 resource "aws_flow_log" "example" {
-  log_destination      = "arn:marcio-clc11-tfstate-impacta11"
+  log_destination      = "arn:aws:s3:::marcio-clc11-tfstate-impacta11"
   log_destination_type = "s3"
   traffic_type         = "ALL"
   vpc_id               = aws_vpc.minha_vpc.id
 }
 
+# Correcao segunda issue
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.minha_vpc.id
+  
+  tags = {
+    Name = "my-iac-sg"
+  }
+}
 
 resource "aws_subnet" "sub_net_pub_1a" {
   vpc_id     = aws_vpc.vpc_iac_clc11.id
