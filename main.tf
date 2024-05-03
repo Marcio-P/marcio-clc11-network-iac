@@ -8,7 +8,7 @@ resource "aws_vpc" "vpc_iac_clc11" {
 }
 
 # Correcao primeira issue
-resource "aws_flow_log" "example" {
+resource "aws_flow_log" "minha_vpc" {
   log_destination      = "arn:aws:s3:::marcio-clc11-tfstate-impacta11"
   log_destination_type = "s3"
   traffic_type         = "ALL"
